@@ -5,11 +5,11 @@ Projeto de A3 de um sistema de planejador semanal ao estilo tweek, baseado em mi
 * [Como subir os serviços?](#como-subir-os-serviços)
     * [Avaliação A3](#avaliação-a3)
     * [Outros casos / uso geral](#outros-casos--uso-geral)
-        * [Passo 1: Configurar serviços  de banco de dados](#passo-1-configurar-serviços--de-banco-de-dados)
-        * [Passo 2: Configurar um serviço de barramento de eventos RabbitMQ](#passo-2-configurar-um-serviço-de-barramento-de-eventos-rabbitmq)
+        * [Passo 1: Configurar serviço  de banco de dados](#passo-1-configurar-serviço--de-banco-de-dados)
+        * [Passo 2: Configurar serviço de barramento de eventos RabbitMQ](#passo-2-configurar-serviço-de-barramento-de-eventos-rabbitmq)
         * [Passo 3: Criar uma conta para utilizar a api do chatGPT](#passo-3-criar-uma-conta-para-utilizar-a-api-do-chatgpt)
         * [Passo 4: criar arquivos ".env" e declarar variáveis de ambiente](#passo-4-criar-arquivos-env-e-declarar-variáveis-de-ambiente)
-        * [Passo 5: Instalar dependencias e executar os serviços](#passo-5-instalar-dependencias-e-executar-os-serviços)
+        * [Passo 5: Instalar dependências e executar os serviços](#passo-5-instalar-dependências-e-executar-os-serviços)
 
 * [Como Fazer chamadas aos serviços?](#como-fazer-chamadas-aos-serviços)
     * [Criar um compromisso](#criar-um-compromisso)
@@ -23,17 +23,17 @@ Projeto de A3 de um sistema de planejador semanal ao estilo tweek, baseado em mi
 
 
 ### Avaliação A3
-<b>Para efeitos de avaliação da A3, será enviado por email o arquivo .env dos tres serviços, tornando necessario seguir apenas do [Passo 5](#passo-5-instalar-dependencias-e-executar-os-serviços) em diante.
+<b>Para efeitos de avaliação da A3, será enviado por email o arquivo `.env` dos três serviços, tornando necessário seguir apenas do [Passo 5](#passo-5-instalar-dependencias-e-executar-os-serviços) em diante.
 
 Os detalhes de como fazer as requisições e exemplos do JSON do body da chamada podem ser encontrados a partir [desta sessão](#como-fazer-chamadas-aos-serviços).
 </b>
 
 
 ### Outros casos / uso geral
-Para subir os serviços do zero, sem o arquivo. env, siga os seguintes passos:
+Para subir os serviços do zero, sem o arquivo `.env`, siga os seguintes passos:
 
-### Passo 1: Configurar serviços  de banco de dados
-Criar um banco de dados mysql e rodar o seguinte script para criação dos schemas:
+### Passo 1: Configurar serviço  de banco de dados
+Criar um banco de dados mySQL e rodar o seguinte script para criação dos Schemas:
 
 ```SQL
 -- cria os schemas necessários para os microsserviços
@@ -72,14 +72,14 @@ Create table tb_compromisso (
     hr_compromisso time NOT NULL
 );
 ```
-### Passo 2: Configurar um serviço de barramento de eventos RabbitMQ
+### Passo 2: Configurar serviço de barramento de eventos RabbitMQ
 No desenvolvimento deste projeto, utilizamos o serviço <a href='https://www.cloudamqp.com/'><b><i>cloudamqp</i></b></a> para hospedar o nosso barramento de eventos gratuitamente, entretanto, pode ser utilizado qualquer forma de hospedagem, desde que o serviço seja o RabbitMQ. Uma vez criado o serviço, configure uma fila e uma exchange para o modo <i>"fanout"</i> de entrega de mensagens.
 
 ### Passo 3: Criar uma conta para utilizar a api do chatGPT
-Para executar o microsserviços de detalhes será necessário se comunicar e enviar requests à api do chatGPT, para tal, é necessário se cadastrar no site da <a href='https://openai.com/api/'><b><i>OpenAI </i></b></a> e gerar uma api Key, e, caso não possua, é necessario adicionar creditos à sua conta da OpenAI.
+Para executar o microsserviço de detalhes será necessário se comunicar e enviar requests à api do chatGPT, para tal, é necessário se cadastrar no site da <a href='https://openai.com/api/'><b><i>OpenAI </i></b></a> e gerar uma api Key e, caso não possua, é necessario adicionar créditos à sua conta da OpenAI.
 
 ### Passo 4: criar arquivos ".env" e declarar variáveis de ambiente
-em cada uma das pastas onde se encontram os microsserviços, criar um arquivo ".env" e populá-los da seguinte forma:
+Em cada uma das pastas onde se encontram os microsserviços, criar um arquivo ".env" e populá-los da seguinte forma:
 
 #### Compromissos:
 ```.env
@@ -117,19 +117,19 @@ RABBITMQ_URL={O endereço do RabbitMQ}
 RABBITMQ_QUEUE ={A fila do rabbit MQ}
 RABBITMQ_EXCHANGE={O exchange de fanout do RabbitMQ}
 ```
-### Passo 5: Instalar dependencias e executar os serviços
-Uma vez adicionados os arquivos .env nas pastas de cada um dos serviços basta executar no terminal (em cada uma das paginas):
+### Passo 5: Instalar dependências e executar os serviços
+Uma vez adicionados os arquivos `.env` nas pastas de cada um dos serviços basta executar no terminal (em cada uma das paginas):
 
 ```shell
-npm install
-node index.js
+$ npm install
+$ node index.js
 ```
 
 alternativamente é possível executá-los com o nodemon para efeitos de testes e alterações com:
 
 ```shell
-npm install
-npm start
+$ npm install
+$ npm start
 ```
 
 ## Como Fazer chamadas aos serviços?
@@ -170,7 +170,7 @@ Para deletar um detalhe, utiliza-se a rota `/detalhe/delete` do endereço do ser
 }
 ```
 ### Realizar uma busca:
-Para realizar uma busca basta fazer uma requisição do tipo GET na rota `/compromisso/:id` no endereço do serviço de busca, onde o id é o id do compromisso sendo buscado, a busca retornará um JSON contendo todos os detalhes atrelados à aquele compromisso. no caso dos exemplos acima, o retorno é o seguinte:\
+Para realizar uma busca basta fazer uma requisição do tipo <i>GET</i> na rota `/compromisso/:id` no endereço do serviço de busca, onde o id é o id do compromisso sendo buscado, a busca retornará um JSON contendo todos os detalhes atrelados à aquele compromisso. no caso dos exemplos acima, o retorno é o seguinte:
 
 ```JSON
 [
