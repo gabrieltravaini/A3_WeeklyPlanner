@@ -170,7 +170,7 @@ Para deletar um detalhe, utiliza-se a rota `/detalhe/delete` do endereço do ser
 }
 ```
 ### Realizar uma busca:
-Para realizar uma busca basta fazer uma requisição do tipo <i>GET</i> na rota `/compromisso/:id` no endereço do serviço de busca, onde o id é o id do compromisso sendo buscado, a busca retornará um JSON contendo todos os detalhes atrelados à aquele compromisso. no caso dos exemplos acima, o retorno é o seguinte:
+Para realizar uma busca basta fazer uma requisição do tipo <i>GET</i> na rota `/compromisso/:id` no endereço do serviço de busca, onde o id é o id do compromisso sendo buscado, a busca retornará um JSON contendo todos os detalhes atrelados à aquele compromisso. No caso dos exemplos acima, o retorno é o seguinte:
 
 ```JSON
 [
